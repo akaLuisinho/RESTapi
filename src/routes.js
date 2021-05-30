@@ -5,4 +5,5 @@ const AuthController = require('./Controllers/AuthController')
 
 router.post('/register', AuthController.Register)
 
+router.post('/authenticate', AuthController.Authenticate)
 module.exports = router
