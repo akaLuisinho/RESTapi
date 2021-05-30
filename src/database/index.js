@@ -1,5 +1,13 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/restapi', { useNewUrlParser, useMongoClient: true });
+const url = 'mongodb://localhost/restapi'
 
+const options = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}
+
+mongoose.connect(url, options);
+
+mongoose.set('useCreateIndex', true)
 module.exports = mongoose
