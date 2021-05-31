@@ -1,9 +1,30 @@
 const Post = require('../Models/PostModel')
 
-async function listPosts(req, res) {
-    const posts = await Post.find()
+async function createPost(req, res) {
 
-    return res.send({ Post })
+    const post = {
+        title: req.body.title,
+        text: req.body.text,
+        author: req.user
+    }
+
+    try {
+        const createdPost = await Post.create(post)
+
+        return res.send({ createdPost })
+    } catch (error) {
+        return res.status(400).send({ error: 'Error creating post' })
+    }
+}
+
+async function listPosts(req, res) {
+    try {
+        const posts = await Post.find().populate('author')
+
+        return res.send({ posts })
+    } catch (error) {
+        return res.status(400).send({ error: 'Error loading posts' })
+    }
 }
 
 async function showPostsByUser(req, res) {
@@ -13,14 +34,14 @@ async function showPostsByUser(req, res) {
 }
 
 async function showPost(req, res) {
-    const post = await Post.findOne({ post_id: req.header.id })
+    const post = await Post.findById(req.params.id).populate('author')
 
     return res.send({ post })
 }
 
 
 async function updatePost(req, res) {
-    const updatedPost = await Post.updateOne({ post_id: req.header.id }, {
+    const updatedPost = await Post.updateById({ post_id: req.params.id }, {
         title: req.body.title,
         text: req.body.text,
     })
@@ -36,4 +57,4 @@ async function deletePost(req, res) {
 
 
 
-module.exports = { listPosts, showPostsByUser, showPost, updatePost, deletePost }
+module.exports = { createPost, listPosts, showPostsByUser, showPost, updatePost, deletePost }
