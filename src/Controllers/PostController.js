@@ -15,6 +15,7 @@ async function createPost(req, res) {
     } catch (error) {
         return res.status(400).send({ error: 'Error creating post' })
     }
+
 }
 
 async function listPosts(req, res) {
@@ -25,34 +26,55 @@ async function listPosts(req, res) {
     } catch (error) {
         return res.status(400).send({ error: 'Error loading posts' })
     }
+
+}
+
+
+async function showPost(req, res) {
+    try {
+        const post = await Post.findById(req.params.id).populate('author')
+
+        return res.send({ post })
+    } catch (error) {
+        return res.status(400).send({ error: 'Error loading post' })
+    }
+
 }
 
 async function showPostsByUser(req, res) {
-    const postsFromUser = await Post.findOne({ user_id: req.id })
+    try {
+        const postsFromUser = await User.findOne({ email: req.params.email })
 
-    return res.send({ postsFromUser })
+        return res.send({ postsFromUser })
+    } catch (error) {
+        return res.status(400).send({ error: 'Error loading posts from this user' })
+    }
+
 }
-
-async function showPost(req, res) {
-    const post = await Post.findById(req.params.id).populate('author')
-
-    return res.send({ post })
-}
-
 
 async function updatePost(req, res) {
-    const updatedPost = await Post.updateById({ post_id: req.params.id }, {
-        title: req.body.title,
-        text: req.body.text,
-    })
+    try {
+        const updatedPost = await Post.findByIdAndUpdate(req.params.id, {
+            title: req.body.title,
+            text: req.body.text,
+        })
 
-    return res.send({ updatedPost })
+        return res.send({ updatedPost })
+    } catch (error) {
+        return res.status(400).send({ error: 'Error updating post' })
+    }
+
 }
 
 async function deletePost(req, res) {
-    const Post = await Post.findOneAndDelete({ post_id: req.body.id })
+    try {
+        await Post.findByIdAndDelete(req.params.id)
 
-    return res.send({ Post })
+        return res.send()
+    } catch (error) {
+        return res.status(400).send({ error: 'Error deleting post' })
+    }
+
 }
 
 
