@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const jwt = require('../jwt')
 const User = require('../Models/UserModel')
+const auth = require('../Middlewares/Auth')
 
 async function Register(req, res) {
     const { email } = req.body
@@ -41,5 +42,6 @@ async function Authenticate(req, res) {
 
     return res.send({ user, token })
 }
+
 
 module.exports = { Register, Authenticate }

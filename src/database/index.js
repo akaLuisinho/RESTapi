@@ -10,4 +10,5 @@ const options = {
 mongoose.connect(url, options);
 
 mongoose.set('useCreateIndex', true)
+
 module.exports = mongoose
