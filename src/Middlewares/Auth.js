@@ -1,4 +1,3 @@
-const { TokenExpiredError } = require('jsonwebtoken')
 const jwt = require('../jwt')
 
 module.exports = function (req, res, next) {
