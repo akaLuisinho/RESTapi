@@ -32,7 +32,7 @@ async function listPosts(req, res) {
 
 async function showPost(req, res) {
     try {
-        const post = await Post.findById(req.params.id).populate('author').populate('comments')
+        const post = await Post.findById(req.params.postId).populate('author').populate('comments')
 
         return res.send({ post })
     } catch (error) {
@@ -54,7 +54,7 @@ async function showPostsByUser(req, res) {
 
 async function updatePost(req, res) {
     try {
-        const updatedPost = await Post.findByIdAndUpdate(req.params.id, {
+        const updatedPost = await Post.findByIdAndUpdate(req.params.postId, {
             title: req.body.title,
             text: req.body.text,
         }, { new: true })
@@ -68,7 +68,7 @@ async function updatePost(req, res) {
 
 async function deletePost(req, res) {
     try {
-        await Post.findByIdAndDelete(req.params.id)
+        await Post.findByIdAndDelete(req.params.postId)
 
         return res.send()
     } catch (error) {

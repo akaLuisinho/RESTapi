@@ -5,7 +5,7 @@ async function createComment(req, res) {
     const comment = {
         author: req.user,
         text: req.body.text,
-        post: req.params.id
+        post: req.params.postId
     }
 
     try {
@@ -25,12 +25,43 @@ async function createComment(req, res) {
 
 }
 
-function updateComment(req, res) {
+async function updateComment(req, res) {
+    const { commentId } = req.params
+    try {
+        const comment = await Comment.findById(commentId)
 
+        if (comment.author == req.user) {
+            const newComment = await Comment.findByIdAndUpdate(commentId, { text: req.body.text }, { new: true })
+
+            return res.status(200).send({ newComment })
+        }
+
+        return res.status(400).send({ error: 'Not comment author' })
+    } catch (error) {
+        console.log(error);
+        return res.status(400).send({ error: 'Error updating comment' })
+    }
 }
 
-function deleteComment(req, res) {
+async function deleteComment(req, res) {
+    const { postId, commentId } = req.params
+    try {
+        const comment = await Comment.findById(commentId)
+        if (comment.author == req.user) {
+            await Comment.findByIdAndDelete(commentId)
 
+            const commentedPost = await Post.findById(postId)
+            const commentsWhitoutDeleted = commentedPost.comments.filter(comment => comment != commentId)
+            commentedPost.comments = commentsWhitoutDeleted
+            commentedPost.save()
+
+            return res.status(200).send()
+        }
+        return res.status(400).send({ error: 'Not comment author' })
+    } catch (error) {
+        console.log(error);
+        return res.status(400).send({ error: 'Error deleting comment' })
+    }
 }
 
 module.exports = { createComment, updateComment, deleteComment }
