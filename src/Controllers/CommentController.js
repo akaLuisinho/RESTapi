@@ -14,7 +14,7 @@ async function createComment(req, res) {
         createdComment.save()
 
         const post = await Post.findById(comment.post)
-        await post.comments.push(createdComment._id)
+        await post.comments.push(createdComment)
 
         post.save()
 
