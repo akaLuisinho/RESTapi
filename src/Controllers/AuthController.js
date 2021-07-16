@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt')
 const jwt = require('../jwt')
 const User = require('../Models/UserModel')
-const auth = require('../Middlewares/Auth')
 
 async function Register(req, res) {
     const { email } = req.body

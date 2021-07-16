@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const url = 'mongodb://localhost/restapi'
+const url = 'mongodb+srv://me:1234@restapi.7rpfi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 
 const options = {
     useNewUrlParser: true,

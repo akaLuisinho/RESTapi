@@ -7,4 +7,4 @@ app.use(express.json())
 app.use(router)
 app.use(express.urlencoded({ extended: true }))
 
-app.listen(3333)
+app.listen(3000)
