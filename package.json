@@ -6,7 +6,8 @@
   "repository": "https://github.com/akaLuisinho/RESTapi",
   "author": "Luis Felipe <luis.felipeszsv@gmail.com>",
   "scripts": {
-    "dev": "nodemon src/index"
+    "dev": "nodemon src/index",
+    "test": "jest"
   },
   "license": "MIT",
   "dependencies": {
@@ -17,6 +18,7 @@
     "nodemon": "^2.0.7"
   },
   "devDependencies": {
-    "@types/mongoose": "^5.10.5"
+    "@types/mongoose": "^5.10.5",
+    "jest": "^27.0.6"
   }
 }

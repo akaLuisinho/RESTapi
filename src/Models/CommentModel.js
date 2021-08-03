@@ -1,6 +1,5 @@
 const mongoose = require('../Database')
 
-
 const CommentSchema = new mongoose.Schema({
     author: {
         type: mongoose.Schema.Types.ObjectId,

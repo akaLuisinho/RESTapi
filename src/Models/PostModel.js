@@ -1,6 +1,5 @@
 const mongoose = require('../Database')
 
-
 const PostSchema = new mongoose.Schema({
     title: {
         type: String,
