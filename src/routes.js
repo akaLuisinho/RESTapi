@@ -2,12 +2,12 @@ import { Router } from 'express';
 const router = Router()
 
 import Authenticate from './Middlewares/Auth.js';
-import AuthController from './Controllers/AuthController.js';
+import UserController from './Controllers/UserController.js';
 import PostController from './Controllers/PostController.js';
 import CommentController from './Controllers/CommentController.js';
 
-router.post('/register', AuthController.Register)
-router.post('/authenticate', AuthController.Authenticate)
+router.post('/register', UserController.Register)
+router.post('/authenticate', UserController.Authenticate)
 
 router.post('/posts', Authenticate, PostController.createPost)
 router.get('/posts', Authenticate, PostController.listPosts)//show all posts

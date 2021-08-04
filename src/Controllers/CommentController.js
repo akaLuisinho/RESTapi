@@ -38,7 +38,6 @@ async function updateComment(req, res) {
 
         return res.status(400).send({ error: 'Not comment author' })
     } catch (error) {
-        console.log(error);
         return res.status(400).send({ error: 'Error updating comment' })
     }
 }
