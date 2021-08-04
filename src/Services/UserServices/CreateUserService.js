@@ -3,7 +3,6 @@ import User from '../../Models/UserModel.js';
 
 export async function CreateUserService(name, email, password) {
     try {
-
         if (await User.findOne({ email })) {
             return ({ error: 'User Already Registered' })
         }

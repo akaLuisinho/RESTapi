@@ -1,80 +1,59 @@
-import Post from '../Models/PostModel.js';
+import { CreatePostService } from '../Services/PostServices/CreatePostService.js'
+import { ListPostService } from '../Services/PostServices/ListPostService.js'
+import { ShowPostService } from '../Services/PostServices/ShowPostService.js'
+import { ShowPostByUserService } from '../Services/PostServices/ShowPostByUserService.js'
+import { UpdatePostService } from '../Services/PostServices/UpdatePostService.js'
+import { DeletePostService } from '../Services/PostServices/DeletePostService.js'
 
 async function createPost(req, res) {
-
     const post = {
         title: req.body.title,
         text: req.body.text,
         author: req.user
     }
 
-    try {
-        const createdPost = await Post.create(post)
+    const createdPost = await CreatePostService(post)
 
-        return res.send({ createdPost })
-    } catch (error) {
-        return res.status(400).send({ error: 'Error creating post' })
-    }
-
+    return res.send({ createdPost })
 }
 
 async function listPosts(req, res) {
-    try {
-        const posts = await Post.find().populate('author')
+    const posts = await ListPostService()
 
-        return res.send({ posts })
-    } catch (error) {
-        return res.status(400).send({ error: 'Error loading posts' })
-    }
-
+    return res.send({ posts })
 }
 
-
 async function showPost(req, res) {
-    try {
-        const post = await Post.findById(req.params.postId).populate('author').populate('comments')
+    const { postId } = req.params
 
-        return res.send({ post })
-    } catch (error) {
-        return res.status(400).send({ error: 'Error loading post' })
-    }
+    const post = await ShowPostService(postId)
 
+    return res.send({ post })
 }
 
 async function showPostsByUser(req, res) {
-    try {
-        const postsFromUser = await User.findOne({ email: req.params.email })
+    const { email } = req.params
 
-        return res.send({ postsFromUser })
-    } catch (error) {
-        return res.status(400).send({ error: 'Error loading posts from this user' })
-    }
+    const postsByUser = await ShowPostByUserService(email)
 
+    return res.send({ postsByUser })
 }
 
 async function updatePost(req, res) {
-    try {
-        const updatedPost = await Post.findByIdAndUpdate(req.params.postId, {
-            title: req.body.title,
-            text: req.body.text,
-        }, { new: true })
+    const postId = req.params.postId
+    const { title, text } = req.body
 
-        return res.send({ updatedPost })
-    } catch (error) {
-        return res.status(400).send({ error: 'Error updating post' })
-    }
+    const updatedPost = await UpdatePostService(postId, title, text)
 
+    return res.send({ updatedPost })
 }
 
 async function deletePost(req, res) {
-    try {
-        await Post.findByIdAndDelete(req.params.postId)
+    const { postId } = req.params
 
-        return res.send()
-    } catch (error) {
-        return res.status(400).send({ error: 'Error deleting post' })
-    }
+    const deletedPost = await DeletePostService(postId)
 
+    return res.send({ deletedPost })
 }
 
 

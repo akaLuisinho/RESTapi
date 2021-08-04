@@ -1,7 +1,3 @@
-import bcrypt from 'bcrypt';
-import jwt from '../jwt.js';
-import User from '../Models/UserModel.js';
-
 import { CreateUserService } from '../Services/UserServices/CreateUserService.js'
 import { AuthenticateUserService } from '../Services/UserServices/AuthenticateUserService.js'
 
