@@ -1,6 +1,6 @@
 import jwt from '../jwt.js';
 
-export default function (req, res, next) {
+export function Authenticate(req, res, next) {
     const headerToken = req.headers.authorization
 
     if (!headerToken) {

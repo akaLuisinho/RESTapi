@@ -2,7 +2,7 @@ import { CreateCommentService } from '../Services/CommentServices/CreateCommentS
 import { UpdateCommentService } from '../Services/CommentServices/UpdateCommentService.js'
 import { DeleteCommentService } from '../Services/CommentServices/DeleteCommentService.js'
 
-async function createComment(req, res) {
+export async function createComment(req, res) {
     const comment = {
         author: req.user,
         text: req.body.text,
@@ -14,7 +14,7 @@ async function createComment(req, res) {
     return res.send({ createdComment })
 }
 
-async function updateComment(req, res) {
+export async function updateComment(req, res) {
     const { commentId } = req.params
     const { text } = req.body
     const { user } = req
@@ -24,7 +24,7 @@ async function updateComment(req, res) {
     return res.send({ updatedComment })
 }
 
-async function deleteComment(req, res) {
+export async function deleteComment(req, res) {
     const { postId, commentId } = req.params
     const { user } = req
 
@@ -32,5 +32,3 @@ async function deleteComment(req, res) {
 
     return res.send({ deletedComment })
 }
-
-export default { createComment, updateComment, deleteComment };
