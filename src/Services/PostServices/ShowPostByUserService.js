@@ -6,7 +6,6 @@ export async function ShowPostByUserService(email) {
 
         return ({ postsByUser })
     } catch (error) {
-        console.log(error);
         return ({ error: 'Error loading posts from this user' })
     }
 }

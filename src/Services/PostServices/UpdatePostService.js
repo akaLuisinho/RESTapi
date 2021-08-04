@@ -6,7 +6,6 @@ export async function UpdatePostService(postId, title, text) {
 
         return ({ updatedPost })
     } catch (error) {
-        console.log(error);
         return ({ error: 'Error updating post' })
     }
 }

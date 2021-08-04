@@ -6,7 +6,6 @@ export async function CreatePostService(post) {
 
         return ({ createdPost })
     } catch (error) {
-        console.log(error);
         return ({ error: 'Error creating post' })
     }
 }

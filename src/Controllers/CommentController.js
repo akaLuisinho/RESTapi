@@ -1,5 +1,6 @@
-import Comment from '../Models/CommentModel.js';
-import Post from '../Models/PostModel.js';
+import { CreateCommentService } from '../Services/CommentServices/CreateCommentService.js'
+import { UpdateCommentService } from '../Services/CommentServices/UpdateCommentService.js'
+import { DeleteCommentService } from '../Services/CommentServices/DeleteCommentService.js'
 
 async function createComment(req, res) {
     const comment = {
@@ -8,59 +9,28 @@ async function createComment(req, res) {
         post: req.params.postId
     }
 
-    try {
-        const createdComment = await Comment.create(comment)
+    const createdComment = await CreateCommentService(comment)
 
-        createdComment.save()
-
-        const post = await Post.findById(comment.post)
-        await post.comments.push(createdComment)
-
-        post.save()
-
-        return res.status(200).send({ createdComment })
-    } catch (error) {
-        return res.status(400).send({ error: 'Error creating comment' })
-    }
-
+    return res.send({ createdComment })
 }
 
 async function updateComment(req, res) {
     const { commentId } = req.params
-    try {
-        const comment = await Comment.findById(commentId)
+    const { text } = req.body
+    const { user } = req
 
-        if (comment.author == req.user) {
-            const newComment = await Comment.findByIdAndUpdate(commentId, { text: req.body.text }, { new: true })
+    const updatedComment = await UpdateCommentService(commentId, text, user)
 
-            return res.status(200).send({ newComment })
-        }
-
-        return res.status(400).send({ error: 'Not comment author' })
-    } catch (error) {
-        return res.status(400).send({ error: 'Error updating comment' })
-    }
+    return res.send({ updatedComment })
 }
 
 async function deleteComment(req, res) {
     const { postId, commentId } = req.params
-    try {
-        const comment = await Comment.findById(commentId)
-        if (comment.author == req.user) {
-            await Comment.findByIdAndDelete(commentId)
+    const { user } = req
 
-            const commentedPost = await Post.findById(postId)
-            const commentsWhitoutDeleted = commentedPost.comments.filter(comment => comment != commentId)
-            commentedPost.comments = commentsWhitoutDeleted
-            commentedPost.save()
+    const deletedComment = await DeleteCommentService(postId, commentId, user)
 
-            return res.status(200).send()
-        }
-        return res.status(400).send({ error: 'Not comment author' })
-    } catch (error) {
-        console.log(error);
-        return res.status(400).send({ error: 'Error deleting comment' })
-    }
+    return res.send({ deletedComment })
 }
 
 export default { createComment, updateComment, deleteComment };

@@ -6,7 +6,6 @@ export async function DeletePostService(postId) {
 
         return
     } catch (error) {
-        console.log(error);
         return ({ error: 'Error deleting post' })
     }
 }
