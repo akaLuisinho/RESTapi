@@ -1,6 +1,7 @@
 {
   "name": "API-MongoDB",
   "version": "1.0.0",
+  "type": "module",
   "description": "learning rest apis and mongo integration",
   "main": "index.js",
   "repository": "https://github.com/akaLuisinho/RESTapi",
@@ -12,6 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "cjs-to-es6": "^1.1.1",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.12",

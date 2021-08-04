@@ -1,6 +1,6 @@
-const bcrypt = require('bcrypt')
-const jwt = require('../jwt')
-const User = require('../Models/UserModel')
+import bcrypt from 'bcrypt';
+import jwt from '../jwt.js';
+import User from '../Models/UserModel.js';
 
 async function Register(req, res) {
     const { email } = req.body
@@ -43,4 +43,4 @@ async function Authenticate(req, res) {
 }
 
 
-module.exports = { Register, Authenticate }
+export default { Register, Authenticate };

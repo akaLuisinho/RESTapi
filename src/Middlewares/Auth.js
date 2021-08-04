@@ -1,6 +1,6 @@
-const jwt = require('../jwt')
+import jwt from '../jwt.js';
 
-module.exports = function (req, res, next) {
+export default function (req, res, next) {
     const headerToken = req.headers.authorization
 
     if (!headerToken) {
@@ -23,4 +23,4 @@ module.exports = function (req, res, next) {
         return res.status(401).send({ error: 'Invalid token' })
     }
 
-}
+};

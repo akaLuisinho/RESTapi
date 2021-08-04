@@ -1,4 +1,4 @@
-const Post = require('../Models/PostModel')
+import Post from '../Models/PostModel.js';
 
 async function createPost(req, res) {
 
@@ -79,4 +79,4 @@ async function deletePost(req, res) {
 
 
 
-module.exports = { createPost, listPosts, showPostsByUser, showPost, updatePost, deletePost }
+export default { createPost, listPosts, showPostsByUser, showPost, updatePost, deletePost };

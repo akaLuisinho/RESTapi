@@ -1,5 +1,5 @@
-const mongoose = require('../Database')
-const bcrypt = require('bcrypt')
+import mongoose from '../Database/index.js';
+import bcrypt from 'bcrypt';
 
 const UserSchema = new mongoose.Schema({
     name: {
@@ -33,4 +33,4 @@ UserSchema.pre('save', async function (next) {
 
 const User = mongoose.model('User', UserSchema)
 
-module.exports = User
+export default User;

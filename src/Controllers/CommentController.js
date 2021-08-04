@@ -1,5 +1,5 @@
-const Comment = require('../Models/CommentModel')
-const Post = require('../Models/PostModel')
+import Comment from '../Models/CommentModel.js';
+import Post from '../Models/PostModel.js';
 
 async function createComment(req, res) {
     const comment = {
@@ -64,4 +64,4 @@ async function deleteComment(req, res) {
     }
 }
 
-module.exports = { createComment, updateComment, deleteComment }
+export default { createComment, updateComment, deleteComment };

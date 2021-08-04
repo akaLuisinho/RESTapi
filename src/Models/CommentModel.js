@@ -1,4 +1,4 @@
-const mongoose = require('../Database')
+import mongoose from '../Database/index.js';
 
 const CommentSchema = new mongoose.Schema({
     author: {
@@ -23,4 +23,4 @@ const CommentSchema = new mongoose.Schema({
 
 const Comment = mongoose.model('Comment', CommentSchema)
 
-module.exports = Comment
+export default Comment;

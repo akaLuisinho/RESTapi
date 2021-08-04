@@ -1,10 +1,10 @@
-const express = require('express')
-const router = express.Router()
+import { Router } from 'express';
+const router = Router()
 
-const Authenticate = require('./Middlewares/Auth')
-const AuthController = require('./Controllers/AuthController')
-const PostController = require('./Controllers/PostController')
-const CommentController = require('./Controllers/CommentController')
+import Authenticate from './Middlewares/Auth.js';
+import AuthController from './Controllers/AuthController.js';
+import PostController from './Controllers/PostController.js';
+import CommentController from './Controllers/CommentController.js';
 
 router.post('/register', AuthController.Register)
 router.post('/authenticate', AuthController.Authenticate)
@@ -22,4 +22,4 @@ router.post('/post/:postId/comment', Authenticate, CommentController.createComme
 router.put('/post/:postId/comment/:commentId', Authenticate, CommentController.updateComment)//edit the comment
 router.delete('/post/:postId/comment/:commentId', Authenticate, CommentController.deleteComment)//delete the comment
 
-module.exports = router
+export { router };

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const url = 'mongodb+srv://me:1234@restapi.7rpfi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 
@@ -11,4 +11,4 @@ mongoose.connect(url, options);
 
 mongoose.set('useCreateIndex', true)
 
-module.exports = mongoose
+export default mongoose;
