@@ -6,11 +6,11 @@ export async function AuthenticateUserService(email, password) {
     const user = await User.findOne({ email }).select('+password')
 
     if (!user) {
-        return ({ error: 'User not found' })
+        return ({ "error": "User not found" })
     }
 
     if (!await bcrypt.compare(password, user.password)) {
-        return ({ error: 'Wrong password' })
+        return ({ "error": "Wrong password" })
     }
 
     user.password = undefined

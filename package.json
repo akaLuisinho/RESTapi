@@ -8,7 +8,7 @@
   "author": "Luis Felipe <luis.felipeszsv@gmail.com>",
   "scripts": {
     "dev": "nodemon src/index",
-    "test": "jest"
+    "test": "node --experimental-vm-modules node_modules/.bin/jest"
   },
   "license": "MIT",
   "dependencies": {

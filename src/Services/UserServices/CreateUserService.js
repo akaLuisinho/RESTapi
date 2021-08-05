@@ -4,7 +4,7 @@ import User from '../../Models/UserModel.js';
 export async function CreateUserService(name, email, password) {
     try {
         if (await User.findOne({ email })) {
-            return ({ error: 'User Already Registered' })
+            return ({ "error": "user already exists" })
         }
 
         const user = await User.create({ name, email, password })
@@ -15,6 +15,6 @@ export async function CreateUserService(name, email, password) {
 
         return ({ user, token })
     } catch (error) {
-        return ({ error: 'Registration Failed' })
+        return ({ "error": "registration failed" })
     }
 }

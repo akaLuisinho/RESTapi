@@ -1,19 +1,35 @@
-import { jest } from '@jest/globals';
+import { CreateUserService } from './CreateUserService'
+import { DeleteUserService } from './DeleteUserService'
 
-jest.useFakeTimers();
-
-import { CreateUserService } from './CreateUserService.js'
 describe('Create User', () => {
     it('should create a new user', async () => {
 
-        const testUser = {
-            name: 'test',
-            email: 'test@example.com.br',
-            password: 'textpassword'
-        }
+        const name = 'jest'
+        const email = 'jest@example.com.br'
+        const password = 'testpassword'
 
-        const createdUser = await CreateUserService(testUser)
+        const createdUser = await CreateUserService(name, email, password)
 
-        expect(createdUser).toHave(token)
+        expect(createdUser.user).toHaveProperty('_id')
+        expect(createdUser.user.password).toBeUndefined()
+        expect(createdUser.user.name).toBe(name)
+        expect(createdUser.user.email).toBe(email)
+        expect(createdUser.token).toBeTruthy()
+
+        await DeleteUserService(email)
+    })
+
+    it('should return error user already exists', async () => {
+
+        const name = 'alreadyexists'
+        const email = 'alreadyexists@example.com.br'
+        const password = 'testpassword'
+
+        await CreateUserService(name, email, password)
+        const user = await CreateUserService(name, email, password)
+
+        expect(user).toHaveProperty('error')
+
+        await DeleteUserService(email)
     })
 })
