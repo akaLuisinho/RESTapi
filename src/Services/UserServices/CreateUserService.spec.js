@@ -3,7 +3,6 @@ import { DeleteUserService } from './DeleteUserService'
 
 describe('Create User', () => {
     it('should create a new user', async () => {
-
         const name = 'jest'
         const email = 'jest@example.com.br'
         const password = 'testpassword'
@@ -19,7 +18,7 @@ describe('Create User', () => {
         await DeleteUserService(email)
     })
 
-    it('should return error user already exists', async () => {
+    it('should return user already exists error', async () => {
 
         const name = 'alreadyexists'
         const email = 'alreadyexists@example.com.br'
@@ -29,6 +28,7 @@ describe('Create User', () => {
         const user = await CreateUserService(name, email, password)
 
         expect(user).toHaveProperty('error')
+        expect(user).toEqual({ "error": "user already exists" })
 
         await DeleteUserService(email)
     })
