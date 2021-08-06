@@ -7,11 +7,11 @@ export async function UpdateCommentService(commentId, text, user) {
         if (comment.author == user) {
             const newComment = await Comment.findByIdAndUpdate(commentId, { text }, { new: true })
 
-            return ({ newComment })
+            return newComment
         }
 
-        return ({ error: 'Not comment author' })
+        return ({ "error": "not comment author" })
     } catch (error) {
-        return ({ error: 'Error updating comment' })
+        return ({ "error": "error updating comment" })
     }
 }

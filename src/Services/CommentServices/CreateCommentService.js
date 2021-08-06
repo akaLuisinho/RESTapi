@@ -8,6 +8,7 @@ export async function CreateCommentService(comment) {
         createdComment.save()
 
         const post = await Post.findById(comment.post)
+
         await post.comments.push(createdComment)
 
         post.save()
