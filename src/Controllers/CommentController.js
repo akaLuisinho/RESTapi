@@ -11,7 +11,7 @@ export async function createComment(req, res) {
 
     const createdComment = await CreateCommentService(comment)
 
-    return res.send({ createdComment })
+    return res.json(createdComment)
 }
 
 export async function updateComment(req, res) {

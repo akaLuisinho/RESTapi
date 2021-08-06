@@ -12,8 +12,8 @@ export async function CreateCommentService(comment) {
 
         post.save()
 
-        return ({ createdComment })
+        return createdComment
     } catch (error) {
-        return ({ error: 'Error creating comment' })
+        return ({ "error": "error creating comment" })
     }
 }

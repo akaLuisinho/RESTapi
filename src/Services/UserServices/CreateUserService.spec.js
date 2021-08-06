@@ -11,8 +11,8 @@ describe('Create User', () => {
 
         expect(createdUser.user).toHaveProperty('_id')
         expect(createdUser.user.password).toBeUndefined()
-        expect(createdUser.user.name).toBe(name)
-        expect(createdUser.user.email).toBe(email)
+        expect(createdUser.user.name).toEqual(name)
+        expect(createdUser.user.email).toEqual(email)
         expect(createdUser.token).toBeTruthy()
 
         await DeleteUserService(email)

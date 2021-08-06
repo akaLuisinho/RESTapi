@@ -14,7 +14,7 @@ export async function createPost(req, res) {
 
     const createdPost = await CreatePostService(post)
 
-    return res.send({ createdPost })
+    return res.json(createdPost)
 }
 
 export async function listPosts(req, res) {
