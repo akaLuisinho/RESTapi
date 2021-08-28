@@ -1,5 +1,6 @@
 import { CreatePostService } from './CreatePostService'
 import { DeletePostService } from './DeletePostService'
+
 const user = {
     id: '610dc918052505a4b8e1fdbb'
 }
