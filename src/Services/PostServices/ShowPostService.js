@@ -1,4 +1,6 @@
 import Post from '../../Models/PostModel.js';
+import User from '../../Models/UserModel.js';
+import Comment from '../../Models/CommentModel.js'
 
 export async function ShowPostService(postId) {
     try {
@@ -6,6 +8,7 @@ export async function ShowPostService(postId) {
 
         return ({ post })
     } catch (error) {
+        console.log(error);
         return ({ error: 'Error loading post' })
     }
 }

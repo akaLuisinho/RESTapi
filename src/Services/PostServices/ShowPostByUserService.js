@@ -1,8 +1,11 @@
 import User from '../../Models/UserModel.js';
+import Post from '../../Models/PostModel.js';
 
 export async function ShowPostByUserService(email) {
     try {
-        const postsByUser = await User.findOne({ email })
+        const user = await User.findOne({ email });
+
+        const postsByUser = await Post.find({ author: user.id })
 
         return ({ postsByUser })
     } catch (error) {
