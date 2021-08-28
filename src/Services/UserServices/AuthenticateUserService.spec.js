@@ -1,6 +1,7 @@
 import { CreateUserService } from './CreateUserService'
 import { AuthenticateUserService } from './AuthenticateUserService'
 import { DeleteUserService } from './DeleteUserService'
+
 describe('AuthenticateUser', () => {
     it('should be able to authenticate an user', async () => {
         const name = 'authenticate'
