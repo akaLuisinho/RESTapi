@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
+import '../config/config.js'
 
-const url = 'mongodb+srv://me:1234@restapi.7rpfi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+const url = process.env.MONGO_URL
 
 const options = {
     useNewUrlParser: true,

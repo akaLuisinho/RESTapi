@@ -21,7 +21,7 @@ export async function updateComment(req, res) {
 
     const updatedComment = await UpdateCommentService(commentId, text, user)
 
-    return res.send({ updatedComment })
+    return res.send(updatedComment)
 }
 
 export async function deleteComment(req, res) {
@@ -30,5 +30,5 @@ export async function deleteComment(req, res) {
 
     const deletedComment = await DeleteCommentService(postId, commentId, user)
 
-    return res.send({ deletedComment })
+    return res.send(deletedComment)
 }
