@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import '../config/config.js'
+import '../config/dotenv.js'
 
 const url = process.env.MONGO_URL
 
