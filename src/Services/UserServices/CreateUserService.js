@@ -15,6 +15,7 @@ export async function CreateUserService(name, email, password) {
 
         return ({ user, token })
     } catch (error) {
+        console.log(error);
         return ({ "error": "registration failed" })
     }
 }

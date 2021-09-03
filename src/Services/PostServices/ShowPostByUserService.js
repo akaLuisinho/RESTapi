@@ -7,7 +7,7 @@ export async function ShowPostByUserService(email) {
 
         const postsByUser = await Post.find({ author: user.id })
 
-        return ({ postsByUser })
+        return postsByUser
     } catch (error) {
         return ({ error: 'Error loading posts from this user' })
     }

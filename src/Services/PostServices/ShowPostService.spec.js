@@ -1,21 +1,28 @@
-
+import { CreatePostService } from './CreatePostService'
 import { ShowPostService } from './ShowPostService'
+import { CreateUserService } from '../UserServices/CreateUserService'
 
-const post = {
-    id: '610dc931052505a4b8e1fdbc',
-    title: 'teste',
-    text: 'just testing',
-    author: {
-        id: '610dc918052505a4b8e1fdbb'
-    }
+const user = {
+    name: 'updateposttest',
+    email: 'updatepost@test.com',
+    password: 'updateposttest'
 }
 
 describe('Show Post', function () {
     it('should return a post', async function () {
-        const showingPost = await ShowPostService(post.id)
+        const createdUser = await CreateUserService(user.name, user.email, user.password)
 
-        expect(showingPost.post).toHaveProperty('author');
-        expect(showingPost.post.id).toEqual('610dc931052505a4b8e1fdbc')
-        expect(showingPost.post.author.id).toEqual('610dc918052505a4b8e1fdbb')
+        const post = {
+            title: 'test showing one post',
+            text: 'post for test',
+        }
+
+        const createdPost = await CreatePostService(post.title, post.text, createdUser.user.id)
+
+        const showingPost = await ShowPostService(createdPost.id)
+
+        expect(showingPost).toHaveProperty('author');
+        expect(showingPost.id).toEqual(createdPost.id)
+        expect(showingPost.author.id).toEqual(createdUser.user.id)
     })
 })

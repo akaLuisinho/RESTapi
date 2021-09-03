@@ -6,7 +6,7 @@ export async function ShowPostService(postId) {
     try {
         const post = await Post.findById(postId).populate('author').populate('comments')
 
-        return ({ post })
+        return post
     } catch (error) {
         console.log(error);
         return ({ error: 'Error loading post' })

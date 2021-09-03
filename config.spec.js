@@ -5,28 +5,24 @@ import User from './src/Models/UserModel'
 import Post from './src/Models/PostModel'
 import Comment from './src/Models/CommentModel'
 
-describe('configure database for tests', function () {
+beforeAll(async () => {
+    const url = process.env.MONGO_URL
 
-    beforeAll(() => {
-        const url = process.env.MONGO_URL
+    const options = {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }
 
-        const options = {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        }
+    mongoose.connect(url, options);
 
-        mongoose.connect(url, options);
-    })
+})
 
+afterAll(async () => {
+    await User.deleteMany()
+    await Post.deleteMany()
+    await Comment.deleteMany()
+})
 
-    afterAll(async () => {
-        await User.deleteMany()
-        await Post.deleteMany()
-        await Comment.deleteMany()
-    })
-
-    it('should run correctly', () => {
-        expect(process.env.MONGO_URL).toBeTruthy()
-    })
-
+it('should run correctly', () => {
+    expect(process.env.MONGO_URL).toBeTruthy()
 })

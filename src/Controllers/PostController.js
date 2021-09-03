@@ -12,15 +12,15 @@ export async function createPost(req, res) {
         author: req.user
     }
 
-    const createdPost = await CreatePostService(post)
+    const createdPost = await CreatePostService(post.title, post.text, post.author)
 
-    return res.json(createdPost)
+    return res.json({ createdPost })
 }
 
 export async function listPosts(req, res) {
     const posts = await ListPostService()
 
-    return res.send(posts)
+    return res.send({ posts })
 }
 
 export async function showPost(req, res) {
@@ -28,7 +28,7 @@ export async function showPost(req, res) {
 
     const post = await ShowPostService(postId)
 
-    return res.send(post)
+    return res.send({ post })
 }
 
 export async function showPostsByUser(req, res) {
@@ -36,7 +36,7 @@ export async function showPostsByUser(req, res) {
 
     const postsByUser = await ShowPostByUserService(email)
 
-    return res.send(postsByUser)
+    return res.send({ postsByUser })
 }
 
 export async function updatePost(req, res) {
@@ -45,7 +45,7 @@ export async function updatePost(req, res) {
 
     const updatedPost = await UpdatePostService(postId, title, text)
 
-    return res.send(updatedPost)
+    return res.send({ updatedPost })
 }
 
 export async function deletePost(req, res) {
@@ -53,5 +53,5 @@ export async function deletePost(req, res) {
 
     const deletedPost = await DeletePostService(postId)
 
-    return res.send(deletedPost)
+    return res.send({ deletedPost })
 }

@@ -1,17 +1,20 @@
 import { CreatePostService } from './CreatePostService'
-import { DeletePostService } from './DeletePostService'
+import { CreateUserService } from '../UserServices/CreateUserService'
 
 const user = {
-    id: '610dc918052505a4b8e1fdbb'
+    name: 'createposttest',
+    email: 'createposttest@gmail.com',
+    password: 'createposttest'
 }
 
 describe('Create Post', function () {
     it('it should be able to create a post', async function () {
+        const createdUser = await CreateUserService(user.name, user.email, user.password)
 
         const post = {
             title: 'test',
             text: 'test post',
-            author: user.id
+            author: createdUser.user.id
         }
 
         const createdPost = await CreatePostService(post)
@@ -19,7 +22,5 @@ describe('Create Post', function () {
         expect(createdPost).toHaveProperty('_id')
         expect(createdPost.title).toBe('test')
         expect(createdPost.text).toBe('test post')
-
-        await DeletePostService(createdPost.id)
     })
 })
