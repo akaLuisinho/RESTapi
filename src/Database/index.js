@@ -1,11 +1,12 @@
 import mongoose from 'mongoose';
-import '../config/dotenv.js'
+import '../Config/dotenv.js'
 
 const url = process.env.MONGO_URL
 
 const options = {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
 }
 
 mongoose.connect(url, options);

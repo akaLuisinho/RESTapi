@@ -8,7 +8,6 @@ export async function ShowPostService(postId) {
 
         return post
     } catch (error) {
-        console.log(error);
         return ({ error: 'Error loading post' })
     }
 }
