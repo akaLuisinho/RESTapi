@@ -17,6 +17,7 @@ export async function DeleteCommentService(postId, commentId, user) {
         }
         return ({ "error": "not comment author" })
     } catch (error) {
+        console.log(error);
         return ({ "error": "error deleting comment" })
     }
 }

@@ -1,5 +1,5 @@
 import express from 'express';
-import './config/dotenv.js'
+import './Config/dotenv.js'
 import { router } from './routes.js';
 
 const app = express()

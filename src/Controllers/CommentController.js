@@ -9,7 +9,7 @@ export async function createComment(req, res) {
         post: req.params.postId
     }
 
-    const createdComment = await CreateCommentService(comment)
+    const createdComment = await CreateCommentService(comment.author, comment.text, comment.post)
 
     return res.json(createdComment)
 }

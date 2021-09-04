@@ -1,20 +1,21 @@
 import Comment from '../../Models/CommentModel.js';
 import Post from '../../Models/PostModel.js';
 
-export async function CreateCommentService(comment) {
+export async function CreateCommentService(author, text, post) {
     try {
-        const createdComment = await Comment.create(comment)
+        const createdComment = await Comment.create({ author, text, post })
 
         createdComment.save()
 
-        const post = await Post.findById(comment.post)
+        const commentedPost = await Post.findById(post)
 
-        await post.comments.push(createdComment)
+        await commentedPost.comments.push(createdComment)
 
-        post.save()
+        commentedPost.save()
 
         return createdComment
     } catch (error) {
+        console.log(error);
         return ({ "error": "error creating comment" })
     }
 }
