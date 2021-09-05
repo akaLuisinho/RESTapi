@@ -4,6 +4,7 @@ import { CreatePostService } from '../Services/PostServices/CreatePostService'
 import { UpdateCommentService } from '../Services/CommentServices/UpdateCommentService'
 import { DeleteCommentService } from '../Services/CommentServices/DeleteCommentService'
 import Comment from '../Models/CommentModel'
+import Post from '../Models/PostModel'
 
 const testUser = await CreateUserService('commenttest', 'commenttest@example.com', 'commenttset')
 const testPost = await CreatePostService('test', 'test', testUser.user.id)
@@ -48,7 +49,6 @@ describe('Delete Comment', () => {
 
         expect(createdComment).toHaveProperty('_id')
         expect(createdComment.text).toEqual('test comment')
-
         const deletedComment = await DeleteCommentService(testPost.id, createdComment.id, testUser.user.id)
 
         expect(deletedComment).toBeUndefined()

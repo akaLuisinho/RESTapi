@@ -4,7 +4,6 @@ import { ShowPostService } from '../Services/PostServices/ShowPostService'
 import { ShowPostByUserService } from '../Services/PostServices/ShowPostByUserService'
 import { DeletePostService } from '../Services/PostServices/DeletePostService'
 import { CreateUserService } from '../Services/UserServices/CreateUserService'
-import Post from '../Models/PostModel'
 import User from '../Models/UserModel'
 
 const testUser = await CreateUserService('posttest', 'posttest@example.com', 'posttest')
@@ -83,6 +82,5 @@ describe('Delete Post', function () {
 })
 
 afterAll(async () => {
-    await Post.deleteMany()
     await User.deleteMany()
 })

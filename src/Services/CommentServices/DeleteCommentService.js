@@ -7,12 +7,11 @@ export async function DeleteCommentService(postId, commentId, user) {
         if (comment.author == user) {
             await Comment.findByIdAndDelete(commentId)
             const commentedPost = await Post.findById(postId)
-
             const commentsWhitoutDeleted = commentedPost.comments.filter(comment => comment != commentId)
             commentedPost.comments = commentsWhitoutDeleted
             commentedPost.save()
+            // await Comment.delete()
 
-            await Comment.delete()
             return
         }
         return ({ "error": "not comment author" })
